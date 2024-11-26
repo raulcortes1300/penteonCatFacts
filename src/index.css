@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.fixed-background {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ffffff,
+    #ffffff 9px,
+    #f3f3f3 9px,
+    #f3f3f3 10px
+  );
+  background-attachment: fixed;
+  background-size: 14px 14px;
+}

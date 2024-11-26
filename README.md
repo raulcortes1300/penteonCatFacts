@@ -1,50 +1,75 @@
-# React + TypeScript + Vite
+# Cat Facts App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A beautiful React application that displays cat facts paired with random user profiles, featuring infinite scroll and a modern UI.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-  Infinite scroll loading of cat facts
+-  Random user profiles paired with each fact
+-  Modern, responsive UI with Tailwind CSS
+-  Skeleton loading states
+-  Error handling with toast notifications
+-  Data caching with React Query
+-  Fully responsive design
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React 18
+- TypeScript
+- Tailwind CSS
+- React Query (TanStack Query)
+- React Intersection Observer
+- React Toastify
+- Vite
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/cat-facts-app.git
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+2. Install dependencies:
+```bash
+npm install
 ```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+The application will be available at `http://localhost:5173`
+
+## APIs Used
+
+- [Cat Facts API](https://catfact.ninja/facts) - For fetching cat facts
+- [Random User API](https://randomuser.me/api) - For generating random user profiles
+
+## Features in Detail
+
+### Infinite Scroll
+The app implements infinite scroll using React Intersection Observer and React Query's `useInfiniteQuery`. New content is automatically loaded as the user scrolls to the bottom of the page.
+
+### Error Handling
+The app includes comprehensive error handling with user-friendly toast notifications when API requests fail.
+
+### Loading States
+Skeleton loading states provide visual feedback while content is being loaded, enhancing the user experience.
+
+## Future Improvements
+
+- **Fix Infinite Scroll Double Request**: Currently, the infinite scroll implementation occasionally triggers two API requests instead of one when reaching the bottom of the page. This could be optimized.
+
+- **Add Comprehensive Testing**:
+  - Implement unit tests using Jest for components 
+
+- **Accessibility**:
+  - Add ARIA labels and roles

@@ -1,45 +1,22 @@
-export const fetchTodos = async () => {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+import type { CatFactsResponse, RandomUsersResponse } from "../types";
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+export const fetchPage = async ({ pageParam = 1 }) => {
+  const [catResponse, userResponse] = await Promise.all([
+    fetch(`https://catfact.ninja/facts?page=${pageParam}`),
+    fetch("https://randomuser.me/api?results=10"),
+  ]);
 
-    return await response.json();
-  } catch (error) {
-    console.error("Error fetching todos:", error);
-
-    // Re-throw the error so React Query can handle it
-    throw error;
-  }
-};
-
-export const fetchPosts = async ({ pageParam = 1 }) => {
-  const response = await fetch(
-    `https://jsonplaceholder.typicode.com/posts?_page=${pageParam}&_limit=25`
-  );
-  if (!response.ok) {
-    throw new Error(`Error fetching posts: ${response.status}`);
+  if (!catResponse.ok || !userResponse.ok) {
+    throw new Error("Failed to fetch data");
   }
 
-  // Optionally parse total count from headers (if provided by API)
-  const totalCount = parseInt(response.headers.get("X-Total-Count") || "0", 10);
+  const catData: CatFactsResponse = await catResponse.json();
+  const userData: RandomUsersResponse = await userResponse.json();
 
-  const data = await response.json();
-
-  return { data, totalCount, nextPage: pageParam + 1 };
-};
-
-export const fetchCatFacts = async ({ pageParam = 1 }) => {
-  const response = await fetch(`https://catfact.ninja/facts?page=${pageParam}`);
-  if (!response.ok) {
-    throw new Error(`Error fetching cat facts: ${response.status}`);
-  }
-
-  const data = await response.json();
-  const total = data.total;
-  //   const result = data.data;
-
-  return { total, data };
+  return {
+    facts: catData.data,
+    users: userData.results,
+    nextPage: pageParam < catData.last_page ? pageParam + 1 : undefined,
+    currentPage: pageParam,
+  };
 };

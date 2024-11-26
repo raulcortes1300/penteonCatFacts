@@ -1,22 +1,16 @@
 import "react-toastify/dist/ReactToastify.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { NavBar } from "./components/NavBar";
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
-import InfinitePosts from "./pages/InfinitePosts";
 import { ToastContainer } from "react-toastify";
 import CatFacts from "./pages/CatFacts";
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<CatFacts />} />
-        <Route path="/infinite-scrolling" element={<InfinitePosts />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+    <div className="min-h-screen fixed-background w-full">
+      <div className="flex justify-center items-start py-8 min-h-screen">
+        <div className="w-full max-w-xl bg-[#f7f7f7] min-h-screen">
+          <CatFacts />
+        </div>
+      </div>
       <ToastContainer />
-    </BrowserRouter>
+    </div>
   );
 }
