@@ -27,7 +27,6 @@ const CatFacts = () => {
       toast.error(`Error: ${err.message}`);
     },
   });
-  console.log(data);
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
