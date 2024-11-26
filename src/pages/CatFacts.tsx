@@ -27,6 +27,7 @@ const CatFacts = () => {
       toast.error(`Error: ${err.message}`);
     },
   });
+  console.log(data);
 
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage) {
@@ -57,8 +58,7 @@ const CatFacts = () => {
               <Card
                 key={`${i}-${index}`}
                 fact={fact}
-                // we're getting 10 random users from the API but potentially more cat facts per page that is why the modulo
-                user={page.users[index % page.users.length]}
+                user={page.users[index]}
               />
             ))}
           </React.Fragment>
